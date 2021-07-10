@@ -80,12 +80,15 @@ $db3->query("SELECT * from users");
 $formCount = 0;
 $boolean = false;
 $captureValue = 0;
+
+echo " <form id = 'sendfriendrequestform' method='post' action='http://localhost/userspice5/users/hotstatuspages/friendspage.php' > ";
+
 foreach ($db3->results() as $record ){
 
     if ($record->id == $user->data()->id || $record->id == 1){
 
     } else {
-        echo "<div>";
+        echo "<div style='border:1px solid black;'>";
         //echo "  <form id='".$formCount."'  method='post'>";
         
         echo "  ".$record->fname;
@@ -114,7 +117,7 @@ foreach ($db3->results() as $record ){
 
         } else {
 
-
+            echo " <input type='hidden' id='input".$formCount."' name = 'input".$formCount."' value= '".$record->id."'>";
             echo " <button id = '".$record->id."' class = 'btn-primary' type='button' onclick=\"sendRequest('".$formCount."','".$record->id."')\"> Friend Request </button>  ";
             
         }
@@ -126,6 +129,8 @@ foreach ($db3->results() as $record ){
         $formCount += 1;
     }
 }
+    echo "<button type='submit'  >  Send Requests </button>";
+echo " </form>";
 
 /*
 echo "<form id='friendrequestidsentform' name='friendrequestidsentform' method='post' action='http://localhost/userspice5/users/hotstatuspages/friendrequestsidsentform.php'> ";
@@ -135,59 +140,22 @@ echo "  <input id='friendrequestidsentinputuser2id' name='friendrequestidsentinp
 echo "  <input type='submit'/>";
 echo "</form>"
 */
-
+/*
 echo "<form id='friendrequestform' name='friendrequestform' method='post' action='http://localhost/userspice5/users/hotstatuspages/friendrequestsform.php' > ";
 echo "  <input id='user1id' name='user1id' type='hidden' value='4' />";
 echo "  <input id='user2id' name='user2id' type='hidden' value='666' />";
 echo "  <input type='submit'>";
 echo "</form>"
     
-
+*/
 
 
 ?>
 
 </div> <!-- /#page-wrapper -->
 
-<script type='text/javascript'>
 
-function sendRequest( formid, user2id){
-        alert('formid = ' + formid+ ' user2id = '+user2id);
-       
-       // $('#friendrequestidsentinputuser1id').val(<?php //echo $user->data()->id; ?>);
-       // $('#friendrequestidsentinputuser2id').val(user2id);
-
-      //  alert($('#friendrequestidsentinputuser1id').val());
-      //  alert($('#friendrequestidsentinputuser2id').val());
-
-      $('#user1id').val(<?php echo $user->data()->id; ?>);
-      $('#user2id').val(user2id);
-      alert($('#user1id').val());
-      alert($('#user2id').val());
-        
-        alert('before sending form');
-        $(document).ready(function () {
-  $("friendrequestform").submit(function (event) {
-    var formData = {
-      user1id: $("#user1id").val(),
-      user2id: $("#user2id").val(),
-    };
-
-    $.ajax({
-      type: "POST",
-      url: "http://localhost/userspice5/users/hotstatuspages/friendrequestform.php",
-      data: formData,
-      dataType: "json",
-      encode: true,
-    }).done(function (data) {
-      console.log(data);
-    });
-
-    event.preventDefault();
-  });
-});
-    alert('after sending form');
-    }
+<script>
 
 
 </script>

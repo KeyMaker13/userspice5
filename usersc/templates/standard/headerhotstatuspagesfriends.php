@@ -34,10 +34,37 @@ font-family: 'Roboto', sans-serif !important;
 //optional
 if(file_exists($abs_us_root.$us_url_root.'usersc/templates/'.$settings->template.'.css')){?> <link href="<?=$us_url_root?>usersc/templates/<?=$settings->template?>.css" rel="stylesheet"> <?php } ?>
 
+<?php
+
+echo "test";
+
+if (!empty($_POST['input1'])){
+
+    echo "worked";
+
+
+}
+
+
+?>
 
 
 
 <script type="text/javascript">
+
+    function sendRequest(formid, user2id){
+
+        $('#input'+formid).val(user2id);
+
+        alert($('#input'+formid).val());
+       
+        $.post( "http://localhost/userspice5/users/hotstatuspages/friendspage.php", { user1id: "<?php echo $user->data()->id; ?>", user2id: ""+user2id } );
+
+
+    }
+
+
+
 
   //  function sendFormId(formid,user2id){
    //     alert('in sendFormId ' + formid + " " + user2id);
